@@ -81,6 +81,53 @@
             elem.value='';                           // если всё ок, очищаем поток ввода
             znak = '/';                               // запоминаем знак
         }
+        if(doit == '=')                             // если пользователь нажал =
+        {
+            elem = document.getElementById('pole');
+            valuesecond = parseFloat(elem.value);                             // считываем из поля ввода второе число и преобразуем в float
+            if(isNaN(valuesecond))                                 // если вдруг введено не число
+            {
+                alert("Ой,ошибка");
+                valuefirst = NaN;                               // очищаем первое число
+                valuesecond = NaN;                              // очищаем второе число
+                elem.value='';                             // очищаем поле ввода
+                return;
+            }
+            var itog;                                // переменная итога, после операций
+            switch(znak)                             // switch по знаку который запомнили раньше
+            {
+                case '+':                                // если знак +
+                    itog = valuefirst+valuesecond;       // просто слаживаем 2 ранее запомненых числа
+                    elem.value = itog;                     // выводим в поле итог
+                    valuefirst=NaN;                             // очищаем первое число
+                    valuesecond=NaN;                             // очищаем второе число
+                    znak='';                                      // очищаем знак
+                    break;
+                case '-':
+                    itog = valuefirst-valuesecond;
+                    elem.value = itog;                     // выводим в поле итог
+                    valuefirst=NaN;                             // очищаем первое число
+                    valuesecond=NaN;                             // очищаем второе число
+                    znak='';                                      // очищаем знак
+                    break;
+                case '/':
+                    var cel =  valuefirst/valuesecond;         // т.к в js нет деления! Сначала делим без остатка, остается целая часть
+                    var ost = valuefirst%valuesecond;         // затем берём остаток от деления
+                    itog = cel+ost;                          // слаживаем остаток и целую часть в итоговую переменную
+                    elem.value = itog;                     // выводим в поле итог
+                    valuefirst=NaN;                             // очищаем первое число
+                    valuesecond=NaN;                             // очищаем второе число
+                    znak='';                                      // очищаем знак
+                    break;
+                case '*':
+                    itog = valuefirst*valuesecond;            // умножаем числа
+                    elem.value = itog;                     // выводим в поле итог
+                    valuefirst=NaN;                             // очищаем первое число
+                    valuesecond=NaN;                             // очищаем второе число
+                    znak='';                                      // очищаем знак
+                    break;
+            }
+        }
     }
 </script>
 </html>
