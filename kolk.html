@@ -26,7 +26,18 @@
     var znak='';                                 // для хранения снака
     function clickButton(doit)                   // функция обработки для кнопок
     {
-
+        if(isNaN(valuefirst))                    // если в первом числе пусто
+        {
+            elem = document.getElementById('pole');    // считываем объект с id #pole
+            valuefirst = parseFloat(elem.value);       // заносим в переменну информацию из поля преобразуя в float
+            if(isNaN(valuefirst))                        // если преобразования не произошло
+            {
+                alert("Ой,ошибка! Попробуйте снова!");
+                valuefirst = NaN;
+                elem.value='';                           // очищаем поле ввода
+                return;                                  //  выход из функции
+            }
+        }
         if(doit == '+')                            // если пользователь нажал +
         {
             if(znak != '')                        // проверка, вдруг он уже нажимал на +
